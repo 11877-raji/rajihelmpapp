@@ -1,0 +1,37 @@
+appName: myhelmapp
+
+replicaCount: 1
+
+image:
+  name: eyesoncloud/webapp
+  tag: 47
+
+
+image:
+  repository: postgres
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5432
+
+route:
+  enabled: false
+  host: postgres-app.example.com
+
+resources: {}
+persistence:
+  enabled: true
+  size: 5Gi
+  accessMode: ReadWriteOnce
+  storageClass: ""
+
+config:
+  enabled: true
+  data:
+    POSTGRES_DB: mydb
+    POSTGRES_USER: user
+    POSTGRES_PASSWORD: password
+
+secrets: {}
